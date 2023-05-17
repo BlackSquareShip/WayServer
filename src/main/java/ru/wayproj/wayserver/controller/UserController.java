@@ -1,12 +1,15 @@
 package ru.wayproj.wayserver.controller;
 
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 import ru.wayproj.wayserver.Repositoryes.UserRepository;
 import ru.wayproj.wayserver.models.User;
 
-@RestController("/users")
+import java.net.http.HttpResponse;
+
+@RestController()
+@CrossOrigin
+@RequestMapping("/users")
 public class UserController {
 
     final
@@ -17,7 +20,10 @@ public class UserController {
     }
 
     @PostMapping("/createUser")
-    public void createNewUser(@RequestBody User user){
+    public ResponseEntity<String> createNewUser(@RequestBody User user){
+        System.out.println(user.getFio());
         userRepository.save(user);
+
+        return ResponseEntity.ok("");
     }
 }
