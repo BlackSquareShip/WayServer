@@ -1,6 +1,5 @@
 package ru.wayproj.wayserver.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -12,9 +11,13 @@ import ru.wayproj.wayserver.security.UserDetailsImpl;
 import java.util.Optional;
 
 @Service
-public class UserDetailsServiseImpl implements UserDetailsService {
-    @Autowired
+public class UserDetailsServiceImpl implements UserDetailsService {
+    final
     UserRepository userRepository;
+
+    public UserDetailsServiceImpl(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
